@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome to ChatRooms</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styling.css' %}">
+</head>
+<body>
+    <div class="title-text"> Welcome to <br> ChatRooms </div>
+    <div class="home-container">
+        <form method="POST" action="checkroom">
+            {% csrf_token %}
+            <label for="roomId">Room identifier:</label><br>
+            <input type="text" id="roomId" name="roomId"><br><br>
+            {% for message in messages %}
+                <div>
+                       {{ message }}
+                </div>
+            {% endfor %}
+            <input type="submit" class="decision-button" value="Join room" name="join">
+            <input type="submit" class="decision-button" value="Create room" name="create">
+        </form>
+        <div class="account-actions">
+            <p><a href="{% url 'logout' %}" class="account-action-button">Log Out</a></p>
+            <p><a href="{% url 'password_reset' %}" class="account-action-button">Reset Password</a></p>
+        </div>
+    </div>
+</body>
+</html>
